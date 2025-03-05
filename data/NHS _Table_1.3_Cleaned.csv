@@ -1,0 +1,12 @@
+Specific Disease,ICD-10 Code,Total Admissions,Attributable Admissions,Attributable Percentage
+"Trachea, Lung, Bronchus",C33-C34,106512,83100,78
+Upper Respiratory Sites,C00-C14,24393,15200,62
+Oesophagus,C15,31793,20400,64
+Larynx,C32,4656,3600,78
+Cervical,C53,7091,700,10
+Bladder,C67,68606,26300,38
+Kidney and Renal Pelvis,"C64-C66, C68",19172,4500,24
+Stomach,C16,20926,4200,20
+Pancreas,C25,32222,6800,21
+Unspecified Site,C80,8006,2600,33
+Myeloid Leukaemia,C92,48035,7700,16

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cigarette No Good</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #565657;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+        }
+        .nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .sidebar {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar a {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            margin: 10px 0;
+            display: block;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+        .sidebar a:hover::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 20px;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .sidebar a.active {
+            width: 14px;
+            height: 14px;
+            background: lightgray;
+        }
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        #section1 {
+            background: linear-gradient(to bottom, #373636, #afacac);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <a href="#section1">Home</a>
+    <a href="#section2">Introduction</a>
+    <a href="#section3">Smoking-related disease</a>
+    <a href="#section4">Death Trend</a>
+    <a href="#section5">Anti-tobacco policy</a>
+    <a href="#section6">Policy Impact</a>
+    <a href="#section7">Conclusion</a>
+</div>
+
+<div class="sidebar">
+    <a href="#section1" data-label="Home"></a>
+    <a href="#section2" data-label="Introduction"></a>
+    <a href="#section3" data-label="Smoking & disease"></a>
+    <a href="#section4" data-label="Death Trend"></a>
+    <a href="#section5" data-label="Anti-tobacco policy"></a>
+    <a href="#section6" data-label="Policy Impact"></a>
+    <a href="#section7" data-label="Conclusion"></a>
+</div>
+
+<div id="section1" class="section">
+    <h1>Home</h1>
+    <p>Welcome to 'Cigarette No Good' - an interactive visualization project showing the impacts of smoking.</p>
+</div>
+
+<div id="section2" class="section" style="background-color: #565657;">
+    <h1>Introduction</h1>
+    <p>Placeholder</p>
+</div>
+
+<div id="section3" class="section" style="background-color: #7f7e7e;">
+    <h1>Smoking-related disease</h1>
+    <p>Placeholder</p>
+</div>
+
+<div id="section4" class="section" style="background-color: #565657;">
+    <h1>Death Trend</h1>
+    <p>Death rate over years & more emphasis on lung cancer death</p>
+</div>
+
+<div id="section5" class="section" style="background-color: #7f7e7e;">
+    <h1>Anti-tobacco policy</h1>
+    <p>Bring up anti-tobacco policies carried by some countries</p>
+</div>
+
+<div id="section6" class="section" style="background-color: #565657;">
+    <h1>Policy Impact</h1>
+    <p>Bring up the impact of the anti-tobacco policies (e.g. tax) And explanation on how it reflects the correlation between smoking-related death rate and policies and further indicating that smoking causes more death</p>
+</div>
+
+<div id="section7" class="section" style="background-color: #565657;">
+    <h1>Conclusion</h1>
+    <p>Placeholder</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "chart": {
+    "title": "Enforcement of bans on tobacco advertising",
+    "subtitle": "Enforcement of bans on tobacco advertising are differentiated as follows: complete absence of ban, or ban that does not cover national television (TV), radio and print media; ban on national TV, radio and print media only; ban on national TV, radio and print media as well as on some but not all other forms of direct and/or indirect advertising; ban on all forms of advertising.",
+    "citation": "World Health Organization - Global Health Observatory (2024)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/enforcement-of-bans-on-tobacco-advertising?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Botswana",
+      "Namibia",
+      "Yemen"
+    ]
+  },
+  "columns": {
+    "Enforce bans on tobacco advertising": {
+      "titleShort": "Enforce bans on tobacco advertising",
+      "titleLong": "Enforce bans on tobacco advertising",
+      "descriptionShort": "Country's legislation is assessed to determine whether all or any forms of tobacco advertising promotion and sposorship are banned. The groupings for this indicator are: 1 = Data not reported 2 = Complete absence of ban, or ban that does not cover national television (TV), radio and print media 3 = Ban on national TV, radio and print media only 4 = Ban on national TV, radio and print media as well as on some but not all other forms of direct* and/or indirect** advertising 5 = Ban on all forms of direct* and indirect** advertising. * Direct advertising bans: • national television and radio; • local magazines and newspapers; • billboards and outdoor advertising; • point of sale. ** Indirect advertising bans: • free distribution of tobacco products in the mail or through other means; • promotional discounts; • non-tobacco products identified with tobacco brand names (brand extension); • brand names of non-tobacco products used for tobacco products; • appearance of tobacco products in television and/or films; • sponsored events.",
+      "descriptionKey": [],
+      "unit": "%",
+      "timespan": "2007-2022",
+      "type": "Integer",
+      "owidVariableId": 825536,
+      "shortName": "enforce_bans_on_tobacco_advertising",
+      "lastUpdated": "2024-01-03",
+      "nextUpdate": "2025-03-14",
+      "citationShort": "World Health Organization - Global Health Observatory (2024) – processed by Our World in Data",
+      "citationLong": "World Health Organization - Global Health Observatory (2024) – processed by Our World in Data. “Enforce bans on tobacco advertising” [dataset]. World Health Organization, “Global Health Observatory” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/825536.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-02-14",
+  "activeFilters": {}
+}
