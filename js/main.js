@@ -52,3 +52,30 @@ Promise.all([
 }).catch(function(error) {
     console.error("Error loading datasets:", error);
 });
+
+// Yearly death count
+let pieChartInstance;
+
+d3.csv("data/NHS _Table_1.4_Cleaned.csv").then(data => {
+    data.forEach(d => {
+        d.Year = +d.Year;
+        d.ObservedDeaths = +d["Observed Deaths which can be caused by smoking"];
+        d.AttributableDeaths = +d["Attributable Deaths"];
+        d.NonAttributableDeaths = d.ObservedDeaths - d.AttributableDeaths;
+    });
+
+    // Create the bar chart instance
+    const barVisInstance = new YearDeathBarVis({ parentElement: '#s3-year-death-barchart' }, data);
+
+    // Create the pie chart instance in the new container
+    pieChartInstance = new YearDeathRatePieChart({ parentElement: '#s3-year-death-pie-chart', width: 300, height: 300 });
+
+    // Global function to update the pie chart when a bar is hovered.
+    window.updatePieChart = function(d) {
+        const pieData = [
+            { name: "Non-Attributable Deaths", value: d.NonAttributableDeaths },
+            { name: "Attributable Deaths", value: d.AttributableDeaths }
+        ];
+        pieChartInstance.updateVis(pieData);
+    };
+});

@@ -205,28 +205,81 @@
 </div>
 
 <div id="section3" class="section" style="background-color: #565657;">
-    <p></p>
+</div>
+
+<div id="section3-year-death" class="section" style="background-color: #565657;">
+    <h1 style="color: white"> Smoking-attributable Death from 2009 to 2019 in UK</h1>
+    <br>
+    <div id="container">
+        <div id="s3-year-death-barchart"></div>
+        <div id="s3-year-death-pie-chart"></div>
+    </div>
 </div>
 
 <div id="section4" class="section" style="background-color: #7f7e7e;">
     <h1>Death Trend</h1>
     <p>Death rate over years & more emphasis on lung cancer death</p>
+    <img src="images/year_death_rate_lung_temp.png">
+    <p style="color:white">Brush should be enabled later to allow zoom in and zoom out by adjusting years</p>
+    <p style="color:white">And user will be allowed to switch between different countries' data</p>
+</div>
+
+<div id="section4-1" class="section" style="background-color: #7f7e7e;">
+    <h1>Continue from last graph</h1>
+    <h1>It seems like the death rate is dropping every year?</h1>
+    <h1>That is true. Show the audience why that happens</h1>
+    <h1>(Give a link to next section)</h1>
 </div>
 
 <div id="section5" class="section" style="background-color: #565657;">
-    <h1>Anti-tobacco policy</h1>
-    <p>Bring up anti-tobacco policies carried by some countries</p>
+    <h1>Anti-Tobacco Policy</h1>
+    <h2 style="color:white">Higher Tax Rates and Stricter Tobacco Advertising Bans</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p style="color:white">
+        Visualization: A 3D globe-based interactive display.
+    </p>
+    <p style="color:white">When users click on a country,
+        it will present up to two graphs (if data is available):
+        1. The annual trend of the country's tobacco tax rate.
+    </p>
+    <p style="color:white">    2. The yearly changes in tobacco advertising restrictions.
+        In some cases, one or both graphs may be missing due to data unavailability.
+    </p>
 </div>
+
 
 <div id="section6" class="section" style="background-color: #7f7e7e;">
     <h1>Policy Impact</h1>
     <p>Bring up the impact of the anti-tobacco policies (e.g. tax) And explanation on how it reflects the correlation between smoking-related death rate and policies and further indicating that smoking causes more death</p>
+    <h2 style="color:white">Visualization shows the audience how the tax rate affects death rate</h2>
+    <img src="images/taxrate_deathrate_temp.png">
 </div>
 
-<div id="section7" class="section" style="background-color: #565657;">
-    <h1>Conclusion</h1>
-    <p>Placeholder</p>
+<div id="section6-1" class="section" style="background-color: #7f7e7e;">
+    <h2 style="color:white">Visualization shows the audience how the advertising ban affects death rate</h2>
+    <img src="images/ban_death_rate_temp.png">
+    <p style="color:white">Brush should be enabled later to allow zoom in and zoom out by adjusting years</p>
+    <p style="color:white">Dot is clickable - shows more detailed information</p>
+    <p style="color:white">Selected country is switchable - </p>
 </div>
+
+<div id="section7" class="section">
+    <h1>Conclusion</h1>
+    <p>
+        Smoking remains one of the deadliest habits, claiming millions of lives globally.
+        However, strict tobacco policies—higher taxes, advertising bans, and smoking restrictions—are proving effective.
+        Data shows a steady decline in smoking-related deaths as governments take stronger action against tobacco.
+        While progress is being made, continued awareness, regulation, and personal choices are key to further reducing smoking’s deadly impact.
+    </p>
+    <br>
+    <br>
+    <br>
+    <h2 style="color:white">MORE TO ADD</h2>
+</div>
+
 
 <!-- JS libraries -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -237,6 +290,8 @@
 
 <script src="js/main.js"></script>
 <script src="js/smoke_disease_barVis.js"></script>
+<script src="js/yearDeathRateBarVis.js"></script>
+<script src="js/yearDeathRatePieChart.js"></script>
 
 </body>
 </html>
