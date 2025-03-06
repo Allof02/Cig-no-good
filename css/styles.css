@@ -28,3 +28,26 @@
     color: #ff4646;         /* New text color on hover */
     border-color: #ff4646;   /* New border color on hover */
 }
+
+#section7 {
+    background-color: #565657;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#section7 h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#section7 p {
+    max-width: 800px;
+    font-size: 20px;
+    line-height: 1.6;
+}
