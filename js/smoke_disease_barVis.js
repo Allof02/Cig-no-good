@@ -27,7 +27,7 @@ var barVis = (function() {
     // init
     function init(data) {
         // Set margins and dimensions
-        margin = { top: 40, right: 20, bottom: 100, left: 60 };
+        margin = { top: 40, right: 20, bottom: 120, left: 60 };
         width = 1200 - margin.left - margin.right;
         height = 800 - margin.top - margin.bottom;
 
@@ -111,6 +111,8 @@ var barVis = (function() {
             .call(d3.axisBottom(xScale))
             .selectAll("text")
             .style("text-anchor", "end")
+            .style("fill", "#cfcfcf")
+            .style("font-size", "12px")
             .attr("dx", "-0.5em")
             .attr("dy", "-0.5em")
             .attr("transform", "rotate(-45)");
@@ -119,7 +121,9 @@ var barVis = (function() {
         chartG.selectAll(".y-axis").remove();
         chartG.append("g")
             .attr("class", "y-axis")
-            .call(d3.axisLeft(yScale));
+            .call(d3.axisLeft(yScale))
+            .selectAll("text")
+            .style("fill", "#cfcfcf");
 
         // join bars
         let diseaseGroups = chartG.selectAll(".disease-group")

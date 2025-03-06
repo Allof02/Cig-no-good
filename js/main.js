@@ -35,6 +35,8 @@ Promise.all([
         .attr("class", "custom-btn")
         .attr("id", "toggleButton")
         .text("Switch to 2019")
+        .style("display", "block")
+        .style("margin", "40px auto")
         .on("click", function() {
             if (currentYear === 2018) {
                 currentYear = 2019;
