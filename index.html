@@ -77,12 +77,12 @@
             background: lightgray;
         }
         .section {
-            height: 100vh;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            padding: 20px;
+            padding: 10%;
         }
         #section1 {
             background: linear-gradient(to bottom, #373636, #afacac);
@@ -181,7 +181,7 @@
 
     <nav class="navbar navbar-expand-md navbar-dark my-navbar-custom py-5">
     <div class="container-fluid justify-content-center" id="whyCare-bold">
-    <span class="navbar-brand mb-0 h1 text-center" id="wc-bold" style="font-size: 40px">
+    <span class="navbar-brand mb-0 h1 text-center" id="wc-bold" style="font-size: 180%">
         "With some projections estimating that tobacco could cause up to one billion deaths in the 21st century."
     </span>
     </div>
@@ -217,11 +217,9 @@
 </div>
 
 <div id="section4" class="section" style="background-color: #7f7e7e;">
-    <h1>Death Trend</h1>
-    <p>Death rate over years & more emphasis on lung cancer death</p>
-    <img src="images/year_death_rate_lung_temp.png">
-    <p style="color:white">Brush should be enabled later to allow zoom in and zoom out by adjusting years</p>
-    <p style="color:white">And user will be allowed to switch between different countries' data</p>
+    <div id="globe"></div>
+    <div id="chart"></div>
+    <div class="tooltip" id="tooltip"></div>
 </div>
 
 <div id="section4-1" class="section" style="background-color: #7f7e7e;">
@@ -287,11 +285,13 @@
         crossorigin="anonymous"></script>
 <!-- d3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/topojson.v3.min.js"></script>
 
 <script src="js/main.js"></script>
 <script src="js/smoke_disease_barVis.js"></script>
 <script src="js/yearDeathRateBarVis.js"></script>
 <script src="js/yearDeathRatePieChart.js"></script>
+<script src="js/lungCancerDeathRate.js"></script>
 
 </body>
 </html>

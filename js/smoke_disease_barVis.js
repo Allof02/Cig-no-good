@@ -6,7 +6,7 @@ var barVis = (function() {
     let width, height, margin;
     let chartG; // main <g> for the bars
 
-    // Map each disease to an icon path (adjust to your actual files)
+    //
     const organIconMap = {
         "Trachea, Lung, Bronchus": "icons/lung.png",
         "Upper Respiratory Sites": "icons/throat.png",
@@ -34,8 +34,10 @@ var barVis = (function() {
         // Append SVG to #section3
         svg = d3.select("#section3")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom);
+            .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+            .style("width", "100%")
+            .style("height", "100%");
+
 
         // Main group
         chartG = svg.append("g")
