@@ -1,5 +1,5 @@
 Promise.all([
-    d3.json("data/world-110m.json"), // TopoJSON file
+    d3.json("data/world-110m.json"),
     d3.csv("data/lung-cancer-deaths-per-100000-by-sex-1950-2002.csv", d => ({
         country: d.Entity,
         code: d.Code,
@@ -7,21 +7,18 @@ Promise.all([
         maleDeathRate: +d["Age-standardized deaths from trachea, bronchus, lung cancers in males in those aged all ages per 100,000 people"]
     }))
 ]).then(([worldData, lungData]) => {
-    // Create a set of valid countries from the CSV
     const validCountries = new Set(lungData.map(d => d.country));
 
-    // Initialize both the globe and chart
+
     initGlobe(worldData, validCountries, lungData);
     initLineChart(lungData);
 }).catch(err => console.error(err));
 
-/***********************************************************************
- * 2) GLOBE SETUP
- ***********************************************************************/
+
 function initGlobe(worldData, validCountries, lungData) {
     const width = 600, height = 600;
 
-    // Create SVG for the globe
+
     const svg = d3.select("#globe")
         .append("svg")
         .attr("width", width)
@@ -48,7 +45,7 @@ function initGlobe(worldData, validCountries, lungData) {
     // Tooltip
     const tooltip = d3.select("#tooltip");
 
-    // Draw the countries on the globe
+
     svg.selectAll(".country")
         .data(countries)
         .enter()
@@ -62,8 +59,9 @@ function initGlobe(worldData, validCountries, lungData) {
                     .style("left", event.pageX + 10 + "px")
                     .style("top", event.pageY - 28 + "px")
                     .style("opacity", 1)
-                    .text(countryName);
+                    .text(countryName).style("color", "#01515f").style("font-size", "30px");
             }
+
         })
         .on("mouseout", () => {
             tooltip.style("opacity", 0);
@@ -75,7 +73,6 @@ function initGlobe(worldData, validCountries, lungData) {
             }
         });
 
-    // Optional: Make the globe draggable
     let rotate = [0, 0];
     svg.call(
         d3.drag().on("drag", (event) => {
@@ -85,11 +82,44 @@ function initGlobe(worldData, validCountries, lungData) {
             svg.selectAll("path").attr("d", path);
         })
     );
+
+    //legend
+    const legendItems = [
+        { label: "Data available", color: "steelblue" },
+        { label: "Data not available", color: "#ccc" }
+    ];
+
+
+    const legendG = svg.append("g")
+        .attr("class", "legend-group")
+
+        .attr("transform", `translate(${width-160}, 0)`);
+
+
+    legendG.selectAll(".legend-item")
+        .data(legendItems)
+        .enter()
+        .append("g")
+        .attr("class", "legend-item")
+        .attr("transform", (d, i) => `translate(0, ${i * 25})`)
+        .each(function(d) {
+            d3.select(this)
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", d.color);
+
+            d3.select(this)
+                .append("text")
+                .attr("x", 25)
+                .attr("y", 14)
+                .style("fill", "#fff")
+                .text(d.label);
+        });
 }
 
-/***********************************************************************
- * 3) LINE CHART SETUP
- ***********************************************************************/
 let dataByCountry = {};
 let xScale, yScale, line, xAxis, yAxis;
 
@@ -105,7 +135,7 @@ function initLineChart(lungData) {
     const chartG = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    // Organize data by country
+
     lungData.forEach(d => {
         if (!dataByCountry[d.country]) {
             dataByCountry[d.country] = [];
@@ -115,7 +145,7 @@ function initLineChart(lungData) {
         }
     });
 
-    // Create scales
+
     xScale = d3.scaleLinear()
         .domain(d3.extent(lungData, d => d.year))
         .range([0, width]);
@@ -146,12 +176,19 @@ function initLineChart(lungData) {
     chartG.append("path")
         .attr("class", "line-path");
 
+    chartG.append("text")
+        .attr("class", "y-axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left + 15)
+        .attr("x", -height / 2)
+        .attr("text-anchor", "middle")
+        .style("fill", "white")
+        .text("Deaths per 100,000 people");
+
+
     updateLineChart("United States");
 }
 
-/***********************************************************************
- * 4) UPDATE LINE CHART ON COUNTRY SELECT
- ***********************************************************************/
 function updateLineChart(country) {
     const data = dataByCountry[country];
     if (!data) return;
@@ -166,5 +203,9 @@ function updateLineChart(country) {
         .attr("d", line);
 
     d3.select("#countries-title").text(`Lung Cancer Death Rate - ${country}`);
+
+
+
+
 }
 

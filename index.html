@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Cigarette No Good</title>
     <style>
@@ -94,9 +94,9 @@
 <div class="nav">
     <a href="#section1">Home</a>
     <a href="#section2">Introduction</a>
-    <a href="#whycare">Why care?</a>
-    <a href="#section3">Smoking-related disease</a>
-    <a href="#section4">Death Trend</a>
+    <a href="#whycare-intro">Why care?</a>
+    <a href="#section3-intro">Smoking-related disease</a>
+    <a href="#section4-intro">Death Trend</a>
     <a href="#section5">Anti-tobacco policy</a>
     <a href="#section6">Policy Impact</a>
     <a href="#section7">Conclusion</a>
@@ -105,9 +105,9 @@
 <div class="sidebar">
     <a href="#section1" data-label="Home"></a>
     <a href="#section2" data-label="Introduction"></a>
-    <a href="#whycare" data-label="Why care?"></a>
-    <a href="#section3" data-label="Smoking & disease"></a>
-    <a href="#section4" data-label="Death Trend"></a>
+    <a href="#whycare-intro" data-label="Why care?"></a>
+    <a href="#section3-intro" data-label="Smoking & disease"></a>
+    <a href="#section4-intro" data-label="Death Trend"></a>
     <a href="#section5" data-label="Anti-tobacco policy"></a>
     <a href="#section6" data-label="Policy Impact"></a>
     <a href="#section7" data-label="Conclusion"></a>
@@ -172,6 +172,34 @@
 
 
 
+<div id="whycare-intro" class="section" style="
+  background-color: #7f7e7e;
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+">
+    <h1 style="
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  ">
+        Why do we care?
+    </h1>
+
+
+    <hr style="
+    width: 70%;
+    border-top: 2px solid #ccc;
+    margin: 20px auto;
+  ">
+
+    <p style="
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+  ">
+    </p>
+</div>
 
 <div id="whycare" class="section" style="background-color: #7f7e7e;">
     <p style="font-size: 24px">For decades, tobacco smoking has stood as one of the most significant global health challenges.</p>
@@ -204,29 +232,144 @@
     </nav>
 </div>
 
-<div id="section3" class="section" style="background-color: #565657;">
+<div id="section3-intro" class="section" style="
+  background-color: #565657;
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+">
+    <h1 style="
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  ">
+        Health issue
+    </h1>
+
+
+    <hr style="
+    width: 70%;
+    border-top: 2px solid #ccc;
+    margin: 20px auto;
+  ">
+
+    <p style="
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+  ">
+        This is how smoking affect parts of your body.
+        AND CANCERS
+    </p>
 </div>
 
-<div id="section3-year-death" class="section" style="background-color: #565657;">
-    <h1 style="color: white"> Smoking-attributable Death from 2009 to 2019 in UK</h1>
-    <br>
-    <div id="container">
-        <div id="s3-year-death-barchart"></div>
-        <div id="s3-year-death-pie-chart"></div>
+<div id="section3" class="section" style="background-color: #565657;">
+
+    <div class="row" style="margin: 0; padding: 0; width: 100%; height: 100%;">
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="section3-cancers-charts">
+
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="section3-cancers-exp">
+            <p>Click on any bar to see the explanation.</p>
+        </div>
+
     </div>
 </div>
 
+<!--<div id="section3-year-death" class="section" style="background-color: #565657;">-->
+<!--    <h1 style="color: white"> Smoking-attributable Death from 2009 to 2019 in UK</h1>-->
+<!--    <br>-->
+<!--    <div id="container">-->
+<!--        <div id="s3-year-death-barchart"></div>-->
+<!--        <div id="s3-year-death-pie-chart"></div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div id="section3-year-death" class="section" style="background-color: #565657;">
+    <h1 style="color: white"> Smoking-attributable Death from 2009 to 2019 in UK</h1>
+    <div class="row" style="margin: 0; padding: 0; width: 100%; height: 100%;">
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="s3-year-death-barchart">
+
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="s3-year-death-pie-chart">
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--<div id="section4" class="section" style="background-color: #7f7e7e;">-->
+<!--    <div id="globe"></div>-->
+<!--    <div id="chart"></div>-->
+<!--    <div class="tooltip" id="tooltip"></div>-->
+<!--</div>-->
+
+<div id="section4-intro" class="section" style="
+  background-color: #7f7e7e;
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+">
+    <h1 style="
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  ">
+        Death Trend
+    </h1>
+
+
+    <hr style="
+    width: 70%;
+    border-top: 2px solid #ccc;
+    margin: 20px auto;
+  ">
+
+    <p style="
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+  ">
+        Lung cancer is one of the deadliest outcomes of smoking.
+        Take a look at the chart and explore the map — what patterns do you notice?
+    </p>
+</div>
+
 <div id="section4" class="section" style="background-color: #7f7e7e;">
-    <div id="globe"></div>
-    <div id="chart"></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="globe">
+
+    </div>
     <div class="tooltip" id="tooltip"></div>
+    <div class="row" style="margin: 0; padding: 0; width: 100%; height: 100%;">
+
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="chart">
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="question-mark">
+
+        </div>
+
+    </div>
 </div>
 
 <div id="section4-1" class="section" style="background-color: #7f7e7e;">
-    <h1>Continue from last graph</h1>
-    <h1>It seems like the death rate is dropping every year?</h1>
-    <h1>That is true. Show the audience why that happens</h1>
-    <h1>(Give a link to next section)</h1>
+    <h1>Many developed countries saw a drop in lung cancer death rates after the 1980s — but why did that happen?</h1>
+    <a href="#section5" style="color: white; text-decoration: none;">
+        <h1>Anti-tobacco policies</h1> </a>
 </div>
 
 <div id="section5" class="section" style="background-color: #565657;">
@@ -249,11 +392,56 @@
 </div>
 
 
+<div id="section6-intro" class="section" style="
+  background-color: #7f7e7e;
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+">
+    <h1 style="
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  ">
+        Policy Impact
+    </h1>
+
+
+    <hr style="
+    width: 70%;
+    border-top: 2px solid #ccc;
+    margin: 20px auto;
+  ">
+
+    <p style="
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+  ">
+        Let’s look at the UK, where increasing cigarette taxes appear to correlate with
+        a decline in smoking-attributable cancer admissions. This section explores how
+        policy-driven price changes may help reduce the cancer burden over time.
+    </p>
+</div>
+
 <div id="section6" class="section" style="background-color: #7f7e7e;">
-    <h1>Policy Impact</h1>
-    <p>Bring up the impact of the anti-tobacco policies (e.g. tax) And explanation on how it reflects the correlation between smoking-related death rate and policies and further indicating that smoking causes more death</p>
-    <h2 style="color:white">Visualization shows the audience how the tax rate affects death rate</h2>
-    <img src="images/tax_death_rate_temp.png">
+
+    <div class="row" style="margin: 0; padding: 0;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="tax-chart"
+             style="width: 100%; height: 400px;">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="death-chart"
+             style="width: 100%; height: 400px;">
+        </div>
+    </div>
+
+
+    <div class="row" style="padding: 0; margin: 20px 0 0;">
+        <div class="col-lg-12" style="display: flex; justify-content: center;">
+            <div id="brush-chart" style="width: 600px; height: 100px;">
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="section6-1" class="section" style="background-color: #7f7e7e;">
@@ -287,11 +475,14 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://d3js.org/topojson.v3.min.js"></script>
 
-<script src="js/main.js"></script>
 <script src="js/smoke_disease_barVis.js"></script>
 <script src="js/yearDeathRateBarVis.js"></script>
 <script src="js/yearDeathRatePieChart.js"></script>
 <script src="js/lungCancerDeathRate.js"></script>
+<script src="js/ukBrush.js"></script>
+<script src="js/ukDeathChart.js"></script>
+<script src="js/ukTaxChart.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>

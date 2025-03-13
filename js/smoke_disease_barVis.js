@@ -1,12 +1,67 @@
 // barVis.js
 var barVis = (function() {
 
-
     let svg, xScale, xSubgroup, yScale, color, tooltip;
     let width, height, margin;
-    let chartG; // main <g> for the bars
+    let chartG;
 
-    //
+    // 1) Explanations for each disease
+    const diseaseExplanations = {
+        "Trachea, Lung, Bronchus": `
+        These are key structures in the respiratory system. 
+        The trachea (windpipe) connects the throat to the lungs, and the bronchi are the main airways in the lungs. 
+        Smoking is the primary risk factor for cancers in this region, as it damages cells and affects breathing.
+    `,
+        "Upper Respiratory Sites": `
+        "Upper respiratory sites" generally refers to areas like the nose, nasal cavity, sinuses, and parts of the throat. 
+        Smoking and prolonged exposure to certain chemicals can increase the risk of cancer in these tissues, 
+        which are involved in filtering and humidifying the air we breathe.
+    `,
+        "Oesophagus": `
+        The oesophagus (or esophagus) is the tube that carries food and liquids from the throat to the stomach. 
+        Smoking and heavy alcohol use are major risk factors for oesophageal cancer, 
+        as they irritate the lining and can lead to abnormal cell growth.
+    `,
+        "Larynx": `
+        The larynx (voice box) sits atop the windpipe and houses the vocal cords. 
+        Smoking is the most significant risk factor for laryngeal cancer, 
+        causing changes in the cells that can lead to tumor formation and affect speaking ability.
+    `,
+        "Cervical": `
+        Cervical cancer affects the cervix, which is the lower part of the uterus connecting to the vagina. 
+        While human papillomavirus (HPV) infection is the most common cause, 
+        smoking can also increase the risk by weakening cervical cells’ ability to fight off HPV.
+    `,
+        "Bladder": `
+        The bladder stores urine before it is excreted. 
+        Chemicals in tobacco smoke are absorbed into the bloodstream, filtered by the kidneys, and ultimately excreted into the bladder. 
+        This prolonged exposure to carcinogens increases the risk of bladder cancer in smokers.
+    `,
+        "Kidney and Renal Pelvis": `
+        The kidneys filter waste from the blood, and the renal pelvis is where urine collects before moving to the ureter. 
+        Smoking can contribute to kidney cancer by increasing blood pressure and introducing carcinogenic substances into the urinary tract.
+    `,
+        "Stomach": `
+        The stomach is responsible for breaking down food using acids and enzymes. 
+        Chronic irritation from smoking can damage the stomach lining, increasing the likelihood of abnormal cell growth and stomach cancer over time.
+    `,
+        "Pancreas": `
+        The pancreas is located behind the stomach and produces enzymes for digestion as well as hormones like insulin. 
+        Smoking is a significant risk factor for pancreatic cancer, contributing to inflammation and DNA damage in pancreatic cells.
+    `,
+        "Unspecified Site": `
+        This category indicates a cancer that is not clearly classified in medical records or does not fit other specified categories. 
+        While details are unknown, smoking remains a potential risk factor for many types of cancer across various tissues.
+    `,
+        "Myeloid Leukaemia": `
+        Myeloid leukaemia is a group of cancers that begin in the bone marrow where blood cells are produced. 
+        Smoking may increase the risk of leukemia by introducing carcinogens that affect blood cell DNA 
+        and weaken the body’s defense mechanisms.
+    `
+    };
+
+
+    // Icon map for each cancer
     const organIconMap = {
         "Trachea, Lung, Bronchus": "icons/lung.png",
         "Upper Respiratory Sites": "icons/throat.png",
@@ -32,12 +87,11 @@ var barVis = (function() {
         height = 800 - margin.top - margin.bottom;
 
         // Append SVG to #section3
-        svg = d3.select("#section3")
+        svg = d3.select("#section3-cancers-charts")
             .append("svg")
             .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
             .style("width", "100%")
             .style("height", "100%");
-
 
         // Main group
         chartG = svg.append("g")
@@ -55,6 +109,7 @@ var barVis = (function() {
             .style("pointer-events", "none")
             .style("opacity", 0);
 
+        // Chart title
         chartG.append("text")
             .attr("class", "chart-title")
             .attr("x", width / 2)
@@ -83,16 +138,18 @@ var barVis = (function() {
             .domain(subgroups)
             .range(["#8884d8", "#82ca9d"]);
 
+        // Call update for first rendering
         update(data);
     }
 
     // update
     function update(data, year) {
 
-        //set a title
+        // If 'year' is passed, update the chart title
         let title = chartG.select(".chart-title");
-
-        title.text(`All Cancer admissions vs. Smoking-attributable admissions in UK in ${year}`);
+        if (year) {
+            title.text(`All Cancer admissions vs. Smoking-attributable admissions in UK in ${year}`);
+        }
 
         // determine the max value among total or attributable admissions
         let maxVal = d3.max(data, d =>
@@ -104,7 +161,6 @@ var barVis = (function() {
         xSubgroup.range([0, xScale.bandwidth()]);
         yScale.domain([0, maxVal]).nice();
 
-        // draw axis
         // X axis
         chartG.selectAll(".x-axis").remove();
         chartG.append("g")
@@ -127,20 +183,20 @@ var barVis = (function() {
             .selectAll("text")
             .style("fill", "#cfcfcf");
 
-        // join bars
+        // Join
         let diseaseGroups = chartG.selectAll(".disease-group")
-            .data(data, d => d["Specific Disease"]); // key by disease name
+            .data(data, d => d["Specific Disease"]); // key by disease
 
-        // enter
+        // Enter
         let diseaseGroupsEnter = diseaseGroups.enter()
             .append("g")
             .attr("class", "disease-group")
             .attr("transform", d => `translate(${xScale(d["Specific Disease"])}, 0)`);
 
-        // exit
+        // Exit
         diseaseGroups.exit().remove();
 
-        // merge
+        // Merge
         diseaseGroups = diseaseGroupsEnter.merge(diseaseGroups)
             .attr("transform", d => `translate(${xScale(d["Specific Disease"])}, 0)`);
 
@@ -163,40 +219,47 @@ var barVis = (function() {
             .attr("width", xSubgroup.bandwidth())
             .attr("height", d => height - yScale(d.value))
             .attr("fill", d => color(d.key))
+            // 2) Add click event to show the explanation:
+            .on("click", function(event, d) {
+                // Grab the disease name
+                let diseaseName = d.disease;
+                // Fetch explanation from our map
+                let explanation = diseaseExplanations[diseaseName] ||
+                    "No detailed explanation available for this disease.";
+
+                // Update the text/HTML inside #section3-cancers-exp
+                d3.select("#section3-cancers-exp p").html(explanation).style("color", "white").style("font-size", "40px");
+            })
             .on("mouseover", function(event, d) {
-                console.log(d.key);
                 tooltip.transition().duration(200).style("opacity", 0.9);
+
+                // Different text if it's Attributable Admissions
                 if(d.key === "Attributable Admissions"){
                     tooltip.html(`
-          <div style="display: flex; align-items: center;">
-            <img src="${d.icon}" alt="icon" width="40" height="40" style="margin-right: 10px;" />
-            <div>
-              <strong>${d.disease}</strong><br/>
-              ${d.key}: ${d.value.toLocaleString()}<br/>
-              Attributable %: ${d.percentage}%<br/>
-            </div>
-          </div>
-        `)
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-
-
-                } else{
-
-
-
+                        <div style="display: flex; align-items: center;">
+                         
+                          <div>
+                            <strong>${d.disease}</strong><br/>
+                            ${d.key}: ${d.value.toLocaleString()}<br/>
+                            Attributable %: ${d.percentage}%
+                          </div>
+                        </div>
+                    `);
+                } else {
                     tooltip.html(`
-          <div style="display: flex; align-items: center;">
-            <img src="${d.icon}" alt="icon" width="40" height="40" style="margin-right: 10px;" />
-            <div>
-              <strong>${d.disease}</strong><br/>
-              ${d.key}: ${d.value.toLocaleString()}<br/>
-            </div>
-          </div>
-        `)
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
+                        <div style="display: flex; align-items: center;">
+                      
+                          <div>
+                            <strong>${d.disease}</strong><br/>
+                            ${d.key}: ${d.value.toLocaleString()}
+                          </div>
+                        </div>
+                    `);
                 }
+
+                tooltip
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
 
             })
             .on("mousemove", function(event) {
@@ -216,6 +279,12 @@ var barVis = (function() {
             .attr("width", xSubgroup.bandwidth())
             .attr("height", d => height - yScale(d.value))
             .attr("fill", d => color(d.key));
+
+        // Legend
+        color = d3.scaleOrdinal()
+            .domain(subgroups)
+            .range(["#8884d8", "#82ca9d"]);
+
 
         chartG.selectAll(".legend-group").remove();
         let legendData = subgroups;

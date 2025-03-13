@@ -64,13 +64,13 @@ d3.csv("data/NHS _Table_1.4_Cleaned.csv").then(data => {
         d.NonAttributableDeaths = d.ObservedDeaths - d.AttributableDeaths;
     });
 
-    // Create the bar chart instance
+
     const barVisInstance = new YearDeathBarVis({ parentElement: '#s3-year-death-barchart' }, data);
 
-    // Create the pie chart instance in the new container
+
     pieChartInstance = new YearDeathRatePieChart({ parentElement: '#s3-year-death-pie-chart', width: 300, height: 300 });
 
-    // Global function to update the pie chart when a bar is hovered.
+
     window.updatePieChart = function(d) {
         const pieData = [
             { name: "Non-Attributable Deaths", value: d.NonAttributableDeaths },
@@ -79,3 +79,46 @@ d3.csv("data/NHS _Table_1.4_Cleaned.csv").then(data => {
         pieChartInstance.updateVis(pieData);
     };
 });
+
+//UK DEATH TAX CHARTS
+let myTaxChart, myDeathChart, myBrushVis;
+let selectedTimeRange = [];
+
+
+Promise.all([
+    d3.csv("data/Excise_Duty_Calculation__2009-2024_.csv"),
+    d3.csv("data/UK_YEAR_DEATH.csv")
+])
+    .then(([taxData, deathData]) => {
+
+
+        const parseYear = d3.timeParse("%Y");
+
+        taxData.forEach(d => {
+            d.Year        = +d.Year;
+            d.SpecificTax = +d["Specific Tax (£ per 1,000 sticks)"];
+            d.date        = parseYear(d.Year);
+        });
+
+        deathData.forEach(d => {
+            d.Year                 = +d.Year;
+            d.AttributablePercentage = +d["Attributable percentage"];
+            d.date                 = parseYear(d.Year);
+        });
+
+
+        myTaxChart   = new TaxChart("tax-chart", taxData);
+        myDeathChart = new DeathChart("death-chart", deathData);
+        const allData = taxData.concat(deathData);
+        myBrushVis   = new BrushVis("brush-chart", allData);
+
+    })
+    .catch(err => {
+        console.error("Error loading data:", err);
+    });
+
+
+
+
+
+

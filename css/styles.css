@@ -69,10 +69,12 @@
     cursor: pointer;
     stroke: #333;
     stroke-width: 0.3px;
-    fill: #ccc; /* Default fill for countries */
+    fill: #ccc;
 }
 .country:hover {
     fill: orange;
+    stroke: #f60101;
+    stroke-width: 1px;
 }
 .axis path, .axis line {
     stroke: #ffffff;
