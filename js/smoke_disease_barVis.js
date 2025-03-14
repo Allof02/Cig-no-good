@@ -1,11 +1,9 @@
-// barVis.js
 var barVis = (function() {
 
     let svg, xScale, xSubgroup, yScale, color, tooltip;
     let width, height, margin;
     let chartG;
 
-    // 1) Explanations for each disease
     const diseaseExplanations = {
         "Trachea, Lung, Bronchus": `
         These are key structures in the respiratory system. 
@@ -62,6 +60,7 @@ var barVis = (function() {
 
 
     // Icon map for each cancer
+    // not used anymore
     const organIconMap = {
         "Trachea, Lung, Bronchus": "icons/lung.png",
         "Upper Respiratory Sites": "icons/throat.png",
@@ -79,25 +78,22 @@ var barVis = (function() {
     // total vs. attributable
     const subgroups = ["Total Admissions", "Attributable Admissions"];
 
-    // init
     function init(data) {
-        // Set margins and dimensions
         margin = { top: 40, right: 20, bottom: 120, left: 60 };
         width = 1200 - margin.left - margin.right;
         height = 800 - margin.top - margin.bottom;
 
-        // Append SVG to #section3
         svg = d3.select("#section3-cancers-charts")
             .append("svg")
             .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
             .style("width", "100%")
             .style("height", "100%");
 
-        // Main group
+
         chartG = svg.append("g")
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-        // tooltip
+
         tooltip = d3.select("body")
             .append("div")
             .attr("class", "tooltip")
@@ -109,7 +105,6 @@ var barVis = (function() {
             .style("pointer-events", "none")
             .style("opacity", 0);
 
-        // Chart title
         chartG.append("text")
             .attr("class", "chart-title")
             .attr("x", width / 2)
@@ -119,49 +114,40 @@ var barVis = (function() {
             .style("fill", "#fff")
             .text("All Cancer admissions vs. Smoking-attributable admissions in UK in 2018");
 
-        // xScale: disease names
         xScale = d3.scaleBand()
             .padding(0.2)
             .range([0, width]);
 
-        // xSubgroup: side-by-side bars
         xSubgroup = d3.scaleBand()
             .domain(subgroups)
             .padding(0.05);
 
-        // yScale: admissions count
         yScale = d3.scaleLinear()
             .range([height, 0]);
 
-        // color scale for the subgroups
         color = d3.scaleOrdinal()
             .domain(subgroups)
             .range(["#8884d8", "#82ca9d"]);
 
-        // Call update for first rendering
         update(data);
     }
 
     // update
     function update(data, year) {
 
-        // If 'year' is passed, update the chart title
         let title = chartG.select(".chart-title");
         if (year) {
             title.text(`All Cancer admissions vs. Smoking-attributable admissions in UK in ${year}`);
         }
 
-        // determine the max value among total or attributable admissions
         let maxVal = d3.max(data, d =>
             Math.max(d["Total Admissions"], d["Attributable Admissions"])
         );
 
-        // update domains
         xScale.domain(data.map(d => d["Specific Disease"]));
         xSubgroup.range([0, xScale.bandwidth()]);
         yScale.domain([0, maxVal]).nice();
 
-        // X axis
         chartG.selectAll(".x-axis").remove();
         chartG.append("g")
             .attr("class", "x-axis")
@@ -175,7 +161,6 @@ var barVis = (function() {
             .attr("dy", "-0.5em")
             .attr("transform", "rotate(-45)");
 
-        // Y axis
         chartG.selectAll(".y-axis").remove();
         chartG.append("g")
             .attr("class", "y-axis")
@@ -183,20 +168,16 @@ var barVis = (function() {
             .selectAll("text")
             .style("fill", "#cfcfcf");
 
-        // Join
         let diseaseGroups = chartG.selectAll(".disease-group")
             .data(data, d => d["Specific Disease"]); // key by disease
 
-        // Enter
         let diseaseGroupsEnter = diseaseGroups.enter()
             .append("g")
             .attr("class", "disease-group")
             .attr("transform", d => `translate(${xScale(d["Specific Disease"])}, 0)`);
 
-        // Exit
         diseaseGroups.exit().remove();
 
-        // Merge
         diseaseGroups = diseaseGroupsEnter.merge(diseaseGroups)
             .attr("transform", d => `translate(${xScale(d["Specific Disease"])}, 0)`);
 
@@ -219,21 +200,16 @@ var barVis = (function() {
             .attr("width", xSubgroup.bandwidth())
             .attr("height", d => height - yScale(d.value))
             .attr("fill", d => color(d.key))
-            // 2) Add click event to show the explanation:
             .on("click", function(event, d) {
-                // Grab the disease name
                 let diseaseName = d.disease;
-                // Fetch explanation from our map
                 let explanation = diseaseExplanations[diseaseName] ||
                     "No detailed explanation available for this disease.";
 
-                // Update the text/HTML inside #section3-cancers-exp
                 d3.select("#section3-cancers-exp p").html(explanation).style("color", "white").style("font-size", "40px");
             })
             .on("mouseover", function(event, d) {
                 tooltip.transition().duration(200).style("opacity", 0.9);
 
-                // Different text if it's Attributable Admissions
                 if(d.key === "Attributable Admissions"){
                     tooltip.html(`
                         <div style="display: flex; align-items: center;">
@@ -280,7 +256,6 @@ var barVis = (function() {
             .attr("height", d => height - yScale(d.value))
             .attr("fill", d => color(d.key));
 
-        // Legend
         color = d3.scaleOrdinal()
             .domain(subgroups)
             .range(["#8884d8", "#82ca9d"]);

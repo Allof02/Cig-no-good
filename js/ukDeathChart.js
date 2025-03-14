@@ -86,8 +86,7 @@ class DeathChart {
 
         vis.x.domain(d3.extent(vis.displayData, d => d.date));
         vis.y.domain([0, d3.max(vis.displayData, d => d.AttributablePercentage)]);
-
-        // Update line path
+        
         vis.chartLine
             .datum(vis.displayData)
             .transition().duration(600)
