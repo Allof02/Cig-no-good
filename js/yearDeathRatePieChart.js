@@ -3,7 +3,7 @@ class YearDeathRatePieChart {
         this.config = {
             parentElement: config.parentElement,
             width: config.width || 300,
-            height: config.height || 300,
+            height: 200,
             margin: config.margin || { top: 20, right: 20, bottom: 20, left: 20 }
         };
         this.initVis();

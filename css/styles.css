@@ -47,7 +47,78 @@
 }
 
 #section7 p {
-    max-width: 800px;
+    max-width: 100%;
     font-size: 20px;
     line-height: 1.6;
+}
+
+#section3 {
+    width: 100%;
+    height: 100%;
+}
+
+#section3-year-death {
+    width: 100%;
+    height: 100vh;
+}
+
+#globe, #chart {
+    margin: 20px;
+}
+.country {
+    cursor: pointer;
+    stroke: #333;
+    stroke-width: 0.3px;
+    fill: #ccc;
+}
+.country:hover {
+    fill: orange;
+    stroke: #f60101;
+    stroke-width: 1px;
+}
+.axis path, .axis line {
+    stroke: #ffffff;
+}
+.brush .selection {
+    fill: #777;
+    fill-opacity: 0.3;
+}
+.line-path {
+    fill: none;
+    stroke: orange;
+    stroke-width: 2px;
+}
+
+.country.highlighted {
+    fill: steelblue;
+}
+
+.year-toggle-btn {
+    display: inline-flex;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 40px auto;
+    cursor: pointer;
+
+}
+
+.year-toggle-btn .year-option {
+    flex: 1 1 50%;
+    padding: 10px 20px;
+    text-align: center;
+    color: #fff;
+    background-color: transparent;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.year-toggle-btn .year-option:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.year-toggle-btn .year-option.active {
+    background-color: #888;
+
+    font-weight: bold;
 }
