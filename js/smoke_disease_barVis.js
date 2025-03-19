@@ -103,7 +103,9 @@ var barVis = (function() {
             .style("color", "#fff")
             .style("border-radius", "4px")
             .style("pointer-events", "none")
-            .style("opacity", 0);
+            .style("opacity", 0)
+            .style("border", "1px solid #88e9a3")
+            .style("box-shadow", "0 4px 8px rgba(0,0,0,0.3)");
 
         chartG.append("text")
             .attr("class", "chart-title")
