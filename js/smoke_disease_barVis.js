@@ -205,7 +205,7 @@ var barVis = (function() {
                 let explanation = diseaseExplanations[diseaseName] ||
                     "No detailed explanation available for this disease.";
 
-                d3.select("#section3-cancers-exp p").html(explanation).style("color", "white").style("font-size", "40px");
+                d3.select("#section3-cancers-exp p").html(explanation).style("color", "white").style("font-size", "30px");
             })
             .on("mouseover", function(event, d) {
                 tooltip.transition().duration(200).style("opacity", 0.9);

@@ -58,8 +58,22 @@ class TaxChart {
 
 
         vis.tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip tax-tooltip")
-            .style("opacity", 0);
+            .attr("class", "tax-tooltip")
+            .style("opacity", 0)
+            .style("position", "absolute")
+            .style("background", "rgba(35, 35, 35, 0.9)")
+            .style("border", "1px solid #88a2bc")
+            .style("border-radius", "4px")
+            .style("padding", "12px")
+            .style("box-shadow", "0 4px 8px rgba(0,0,0,0.3)")
+            .style("color", "#fff")
+            .style("font-family", "Arial, sans-serif")
+            .style("font-size", "12px")
+            .style("pointer-events", "none")
+            .style("z-index", "1000")
+            .style("max-width", "200px")
+            .style("transition", "opacity 0.2s ease-in-out");
+
 
 
         vis.wrangleData();
@@ -108,19 +122,81 @@ class TaxChart {
             .attr("fill", "#d4bbee")
             .attr("r", 4)
             .on("mouseover", function(event, d) {
-                vis.tooltip.transition().style("opacity", 1);
-                vis.tooltip.html(`
-                    <strong>Year: ${d.Year}</strong><br/>
-                    £${d.SpecificTax.toFixed(2)} / 1000
-                `)
-                    .style("left", (event.pageX + 10) + "px")
-                    .style("top",  (event.pageY - 28) + "px");
+                // get the previous year's data for comparison (if available)
+                let prevYearData = null;
+                const currentIndex = vis.displayData.findIndex(item => item.Year === d.Year);
+                if (currentIndex > 0) {
+                    prevYearData = vis.displayData[currentIndex - 1];
+                }
 
-                d3.select(this).transition().attr("r", 7).attr("fill", "#ffec00");
+                // calculate percentage change if we have previous year data
+                let changeInfo = "";
+                if (prevYearData) {
+                    const change = d.SpecificTax - prevYearData.SpecificTax;
+                    const percentChange = (change / prevYearData.SpecificTax) * 100;
+
+                    // format the change information with appropriate icons and colors
+                    const changeDirection = change >= 0 ? "▲" : "▼";
+                    const changeColor = change >= 0 ? "#ff7a7a" : "#7aff7a";
+
+                    changeInfo = `
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <span style="color: ${changeColor}; font-weight: bold;">${changeDirection} ${Math.abs(percentChange).toFixed(1)}%</span> 
+                from ${prevYearData.Year}
+            </div>
+        `;
+                }
+
+                vis.tooltip
+                    .html(`
+            <div style="font-size: 14px; font-weight: bold; margin-bottom: 4px; color: #d4bbee;">
+                ${d.Year}
+            </div>
+            <div style="font-size: 16px; margin-bottom: 2px;">
+                <span style="font-weight: bold;">£${d.SpecificTax.toFixed(2)}</span> 
+                <span style="font-size: 12px; opacity: 0.8;">per 1,000 sticks</span>
+            </div>
+            ${changeInfo}
+        `)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 15) + "px")
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1);
+
+                // highlight the current dot
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr("r", 7)
+                    .attr("fill", "#ffec00")
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 2);
+
+                vis.svg.append("line")
+                    .attr("class", "reference-line")
+                    .attr("x1", vis.x(d.date))
+                    .attr("x2", vis.x(d.date))
+                    .attr("y1", 0)
+                    .attr("y2", vis.height)
+                    .attr("stroke", "rgba(255, 255, 255, 0.3)")
+                    .attr("stroke-width", 1)
+                    .attr("stroke-dasharray", "3,3");
             })
             .on("mouseout", function() {
-                vis.tooltip.transition().style("opacity", 0);
-                d3.select(this).transition().attr("r", 4).attr("fill", "#d4bbee");
+                vis.tooltip
+                    .transition()
+                    .duration(300)
+                    .style("opacity", 0);
+
+                d3.select(this)
+                    .transition()
+                    .duration(300)
+                    .attr("r", 4)
+                    .attr("fill", "#d4bbee")
+                    .attr("stroke", "none");
+
+                vis.svg.selectAll(".reference-line").remove();
             });
 
 
@@ -132,10 +208,10 @@ class TaxChart {
 
         vis.xAxisGroup
             .transition().duration(600)
-            .call(d3.axisBottom(vis.x).ticks(5));
+            .call(d3.axisBottom(vis.x).ticks(5)).selectAll("text").style("fill", "#fff");
 
         vis.yAxisGroup
             .transition().duration(600)
-            .call(d3.axisLeft(vis.y));
+            .call(d3.axisLeft(vis.y)).selectAll("text").style("fill", "#fff");
     }
 }

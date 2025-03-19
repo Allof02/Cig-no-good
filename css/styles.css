@@ -16,8 +16,8 @@
 
 #whycare-click-text {
     font-size: 40px;
-    color: #ea9999;
-    border: 4px solid #ea9999;
+    color: #ffffff;
+    border: 4px solid #ffffff;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -121,4 +121,337 @@
     background-color: #888;
 
     font-weight: bold;
+}
+
+.spending-tooltip {
+    position: absolute;
+    background: rgba(35, 35, 35, 0.9) !important;
+    border: 1px solid #888 !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    color: #fff !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    pointer-events: none !important;
+    z-index: 1000 !important;
+    max-width: 250px !important;
+    min-width: 200px !important;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.2px !important;
+}
+
+.spending-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent rgba(35, 35, 35, 0.9) transparent transparent;
+}
+
+.dot-spending, .dot-percent {
+    transition: r 0.2s ease-in-out, stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out;
+}
+
+.guide-line {
+    pointer-events: none;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.brush .selection {
+    cursor: move;
+    fill: #6baed6;
+    fill-opacity: 0.3;
+    stroke: #6baed6;
+    stroke-width: 2px;
+}
+
+.brush .handle {
+    cursor: ew-resize;
+    fill: #6baed6;
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.brush-background {
+    opacity: 0.7;
+}
+
+.brush-label {
+    font-family: sans-serif;
+    pointer-events: none;
+    text-shadow: 0px 0px 3px rgba(0,0,0,0.8);
+}
+
+.handle-grip {
+    pointer-events: none;
+}
+
+.brush-hint {
+    pointer-events: none;
+}
+
+.brush-axis path,
+.brush-axis line {
+    stroke: #888;
+}
+
+.brush-axis text {
+    fill: #fff;
+    font-size: 10px;
+}
+
+.tax-tooltip {
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    background: rgba(35, 35, 35, 0.9) !important;
+    border: 1px solid #d4bbee !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    color: #fff !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    pointer-events: none !important;
+    z-index: 1000 !important;
+    max-width: 200px !important;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+}
+
+.tax-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent rgba(35, 35, 35, 0.9) transparent transparent;
+}
+
+.tax-tooltip.visible {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.tax-tooltip.hidden {
+    transform: translateY(10px) scale(0.95);
+    opacity: 0;
+}
+
+.tax-dot.highlighted {
+    stroke: #fff;
+    stroke-width: 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.reference-line {
+    pointer-events: none;
+}
+
+.death-tooltip {
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    background: rgba(35, 35, 35, 0.9) !important;
+    border: 1px solid #88e9a3 !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    color: #fff !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    pointer-events: none !important;
+    z-index: 1000 !important;
+    max-width: 200px !important;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+}
+
+.death-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent rgba(35, 35, 35, 0.9) transparent transparent;
+}
+
+.death-tooltip.visible {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.death-tooltip.hidden {
+    transform: translateY(10px) scale(0.95);
+    opacity: 0;
+}
+
+.death-dot.highlighted {
+    stroke: #fff;
+    stroke-width: 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.lung-chart-tooltip, .ban-chart-tooltip {
+    position: absolute;
+    background: rgba(35, 35, 35, 0.9);
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    max-width: 220px;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.lung-chart-tooltip {
+    border: 1px solid #88e9a3;
+}
+
+.ban-chart-tooltip {
+    border: 1px solid #d4bbee;
+}
+
+.lung-chart-tooltip::after, .ban-chart-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent rgba(35, 35, 35, 0.9) transparent transparent;
+}
+
+.lung-guide-line, .ban-guide-line {
+    pointer-events: none;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.data-point {
+    transition: r 0.2s ease-in-out, stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out;
+}
+
+.country-card text {
+    font-family: Arial, sans-serif;
+}
+
+.country {
+    transition: fill 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.country.highlighted {
+    cursor: pointer;
+}
+
+.country.selected {
+    stroke: #ffec00;
+    stroke-width: 1.5px;
+}
+
+@keyframes pulse {
+    0% { r: 8; opacity: 1; }
+    100% { r: 25; opacity: 0; }
+}
+
+.pulse-circle {
+    animation: pulse 1.5s infinite;
+}
+
+#tooltip-2 {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.visualization-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.globe-container {
+    flex: 1 1 600px;
+    background: rgba(35, 35, 35, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.charts-container {
+    flex: 1 1 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chart-wrapper {
+    background: rgba(35, 35, 35, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.legend-group {
+    pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+    .visualization-container {
+        flex-direction: column;
+    }
+
+    .globe-container, .charts-container {
+        width: 100%;
+    }
+}
+
+/*         */
+.conclusion-header:hover .toggle-icon {
+    transform: scale(1.1);
+}
+
+.conclusion-header.active {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#section7 button:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+/*
+
+ */
+
+#credits-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+#credits-section a:hover {
+    color: #c888f3;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    #credits-section h2 {
+        font-size: 1.5em;
+    }
+
+    #credits-section .credit-item {
+        padding: 10px;
+    }
 }
