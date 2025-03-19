@@ -100,6 +100,22 @@ class SmokingSpendingChart {
             .style("padding", "8px")
             .style("border-radius", "4px");
 
+        vis.guideLine = vis.chartG.append("line")
+            .attr("class", "guide-line")
+            .attr("y1", 0)
+            .attr("y2", vis.height)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .attr("stroke-dasharray", "3,3")
+            .style("opacity", 0);
+
+        vis.overlayRect = vis.chartG.append("rect")
+            .attr("class", "overlay")
+            .attr("width", vis.width)
+            .attr("height", vis.height)
+            .style("fill", "none")
+            .style("pointer-events", "all");
+
         vis.wrangleData();
     }
 
@@ -233,6 +249,113 @@ class SmokingSpendingChart {
                     .attr("y", 5)
                     .style("fill", "#fff")
                     .text(d.label);
+            });
+
+        this.setupMouseEvents();
+    }
+
+    setupMouseEvents() {
+        let vis = this;
+
+        vis.overlayRect
+            .on("mouseover", function() {
+                vis.guideLine.style("opacity", 1);
+                vis.tooltip.style("opacity", 1);
+            })
+            .on("mouseout", function() {
+                vis.guideLine.style("opacity", 0);
+                vis.tooltip.style("opacity", 0);
+
+                vis.chartG.selectAll(".dot-spending, .dot-percent")
+                    .style("stroke", null)
+                    .style("stroke-width", null);
+            })
+            .on("mousemove", function(event) {
+                const mouseX = d3.pointer(event)[0];
+
+                const xValue = vis.x.invert(mouseX);
+                const bisectYear = d3.bisector(d => d.Year).left;
+                const index = bisectYear(vis.displayData, xValue);
+                const d0 = vis.displayData[Math.max(0, index - 1)];
+                const d1 = vis.displayData[Math.min(vis.displayData.length - 1, index)];
+                const d = xValue - d0.Year > d1.Year - xValue ? d1 : d0;
+
+                vis.guideLine
+                    .attr("x1", vis.x(d.Year))
+                    .attr("x2", vis.x(d.Year));
+
+                let prevYearData = null;
+                const currentIndex = vis.displayData.findIndex(item => item.Year === d.Year);
+                if (currentIndex > 0) {
+                    prevYearData = vis.displayData[currentIndex - 1];
+                }
+
+                let spendingChangeInfo = "";
+                let percentChangeInfo = "";
+
+                if (prevYearData) {
+                    const spendingChange = d.HouseholdTobacco - prevYearData.HouseholdTobacco;
+                    const spendingPercentChange = (spendingChange / prevYearData.HouseholdTobacco) * 100;
+                    const spendingChangeDirection = spendingChange >= 0 ? "▲" : "▼";
+                    const spendingChangeColor = spendingChange >= 0 ? "#ff7a7a" : "#7aff7a"; // Red for increase, green for decrease
+
+                    spendingChangeInfo = `
+                    <span style="color: ${spendingChangeColor}; font-weight: bold; margin-left: 5px;">
+                        ${spendingChangeDirection} ${Math.abs(spendingPercentChange).toFixed(1)}%
+                    </span>
+                    <span style="font-size: 10px; opacity: 0.7;"> from ${prevYearData.Year}</span>
+                `;
+
+                    const percentChange = d.TobaccoPercent - prevYearData.TobaccoPercent;
+                    const percentPercentChange = (percentChange / prevYearData.TobaccoPercent) * 100;
+                    const percentChangeDirection = percentChange >= 0 ? "▲" : "▼";
+                    const percentChangeColor = percentChange >= 0 ? "#ff7a7a" : "#7aff7a"; // Red for increase, green for decrease (both are bad)
+
+                    percentChangeInfo = `
+                    <span style="color: ${percentChangeColor}; font-weight: bold; margin-left: 5px;">
+                        ${percentChangeDirection} ${Math.abs(percentPercentChange).toFixed(1)}%
+                    </span>
+                    <span style="font-size: 10px; opacity: 0.7;"> from ${prevYearData.Year}</span>
+                `;
+                }
+
+                vis.tooltip
+                    .style("opacity", 1)
+                    .html(`
+                    <div style="font-size: 14px; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px;">
+                        ${d.Year}
+                    </div>
+                    <div style="color: #c888f3; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-weight: bold; font-size: 15px;">£${d.HouseholdTobacco.toLocaleString()}</span>
+                            ${spendingChangeInfo}
+                        </div>
+                        <div style="font-size: 11px; opacity: 0.8; margin-top: 2px;">Household Tobacco Spending</div>
+                    </div>
+                    <div style="color: #88e9a3;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="font-weight: bold; font-size: 15px;">${d.TobaccoPercent.toFixed(2)}%</span>
+                            ${percentChangeInfo}
+                        </div>
+                        <div style="font-size: 11px; opacity: 0.8; margin-top: 2px;">of Total Household Expenditure</div>
+                    </div>
+                `)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+
+                vis.chartG.selectAll(".dot-spending, .dot-percent")
+                    .style("stroke", null)
+                    .style("stroke-width", null);
+
+                vis.chartG.selectAll(".dot-spending")
+                    .filter(p => p.Year === d.Year)
+                    .style("stroke", "#fff")
+                    .style("stroke-width", 2);
+
+                vis.chartG.selectAll(".dot-percent")
+                    .filter(p => p.Year === d.Year)
+                    .style("stroke", "#fff")
+                    .style("stroke-width", 2);
             });
     }
 }
