@@ -70,7 +70,7 @@ _Group Members:_
 | Member | Contribution |
 |--------|--------------|
 | **Pete Chen** | Project coordination, coding, and data processing |
-| **Xiyuan Jin** | TOBE ADDED |
+| **Xiyuan Jin** | Tableau Visualizations, docs |
 
 ## 📂 **Repository Structure**  
 
