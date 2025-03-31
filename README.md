@@ -11,8 +11,43 @@ _Group Members:_
 
 ---
 
+## Project URLs
+- **Website:** [https://github.com/Allof02/Cig-no-good](https://github.com/Allof02/Cig-no-good)
+- **Screencast Video:** [Link to your video - TO BE ADDED]
+
+---
+
 ## 📌 **Project Overview**  
 **Cig-No-Good** is an interactive data visualization project focused on revealing the devastating impact of smoking on global health. Through carefully curated data, the project explores how smoking-related diseases, death rates, and economic costs are influenced by factors like tobacco taxes and advertising bans. The goal is to create an engaging and informative platform that helps users understand why smoking is harmful — and why quitting matters.  
+
+---
+
+## 📂 **Repository Structure & Code Attribution**
+
+- **`js/`** - JavaScript files for visualizations
+  - `smoke_disease_barVis.js` - Bar chart visualization for smoking-related diseases
+  - `lungCancerDeathRate.js` - Visualization for lung cancer death rates
+  - `lungLineVis.js` - Line chart for lung cancer data
+  - `banLineVis.js` - Line chart for tobacco advertising ban data
+  - `globeVis.js` - Interactive globe visualization
+  - `ukBrush.js` - Brushing functionality for UK data
+  - `ukDeathChart.js` - Death rate visualization for UK
+  - `ukTaxChart.js` - Tax rate visualization
+  - `smokeSpendingVis.js` - Visualization for tobacco spending
+  - `yearDeathRateBarVis.js` - Bar chart for yearly death rates
+  - `yearDeathRatePieChart.js` - Pie chart for death rate composition
+  - `main.js` - Main JavaScript file that controls the application flow
+
+- **`css/`** - Custom styling
+  - `styles.css` - Custom CSS styles for the project
+
+- **`data/`** - Data files used in visualizations (processed by our team)
+- **`images/`** - Image files used
+
+### Third-Party Libraries
+- **D3.js** - Used for creating all data visualizations
+- **Bootstrap** - Used for responsive layout and basic styling
+- **Topojson** - Used for globe visualization data handling
 
 ---
 
@@ -26,7 +61,7 @@ _Group Members:_
 ## 🌍 **Key Components**  
 ### 🔹 **Home Page:**  
 - Eye-catching title and introduction to engage the audience immediately.  
-- Overview of smoking’s impact on health and society.  
+- Overview of smoking's impact on health and society.  
 
 ### 🔹 **Why Care?**  
 - A breakdown of how smoking affects the body.  
@@ -66,11 +101,22 @@ _Group Members:_
 
 ---
 
-## 👥 **Team Contributions**  
-| Member | Contribution |
-|--------|--------------|
-| **Pete Chen** | Project coordination, coding, and data processing |
-| **Xiyuan Jin** | Tableau Visualizations, docs |
+## ⚙️ **Non-Obvious Interface Features**
 
-## 📂 **Repository Structure**  
+1. **Brushing Tool in Policy Impact Section**
+   - The time range filter in the "Policy Impact" section allows you to focus on specific time periods
+   - Drag the handles on the brush control to adjust the time range displayed in the charts above
+   - This tool helps you explore relationships between tax rates and health outcomes during specific periods
 
+2. **Globe Interaction**
+   - The globe visualizations are fully interactive - you can drag to rotate and explore different regions
+   - Click on any highlighted country to see its specific data in the charts
+   - Countries with available data are shown in blue, while selected countries are highlighted in yellow
+
+3. **Disease Information Panel**
+   - In the "Smoking-related disease" section, clicking on any disease bar will display detailed information about that disease in the right panel
+   - This feature provides educational content about how smoking affects different parts of the body
+
+4. **Year Toggle**
+   - Some visualizations have year toggle buttons that allow you to switch between different years of data
+   - Look for these controls to compare changes over time
