@@ -6,7 +6,7 @@ _Group Members:_
   - **Email:** [petepete.chen@mail.utoronto.ca](mailto:petepete.chen@mail.utoronto.ca)  
 
 - **Xiyuan Jin**  
-  - GitHub: TO BE ADDED  
+  - GitHub: AdwinTazement  
   - Email: xiyuan.jin@mail.utoronto.ca  
 
 ---
