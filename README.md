@@ -2,7 +2,7 @@
 **CSC316 Project**  
 _Group Members:_  
 - **Pete Chen** (Team Coordinator)  
-  - **GitHub:** [allof02](https://github.com/allof02)  
+  - **GitHub:** [allof02](https://github.com/allof02)  Allof02
   - **Email:** [petepete.chen@mail.utoronto.ca](mailto:petepete.chen@mail.utoronto.ca)  
 
 - **Xiyuan Jin**  
