@@ -7,7 +7,7 @@ _Group Members:_
 
 - **Xiyuan Jin**  
   - GitHub: TO BE ADDED  
-  - Email: TO BE ADDED  
+  - Email: xiyuan.jin@mail.utoronto.ca  
 
 ---
 
