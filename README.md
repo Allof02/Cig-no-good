@@ -13,7 +13,7 @@ _Group Members:_
 
 ## Project URLs
 - **Website:** [[https://github.com/Allof02/Cig-no-good](https://allof02.github.io/Cig-no-good/)]
-- **Screencast Video:** [https://drive.google.com/drive/folders/1jn8MyRf65LjucFrE1fvi2Zxlvl-7cXZP?usp=sharing]
+- **Screencast Video:** [[https://drive.google.com/drive/folders/1jn8MyRf65LjucFrE1fvi2Zxlvl-7cXZP?usp=sharing](https://drive.google.com/drive/folders/1jn8MyRf65LjucFrE1fvi2Zxlvl-7cXZP?usp=sharing)]
 
 ---
 
